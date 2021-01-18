@@ -1,0 +1,138 @@
+
+<!doctype html>
+<html lang="pl-PL" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="common/header :: common-header" />
+
+<body>
+
+	<div th:replace="common/header :: navbar" />
+
+
+
+	<!--kontenera -->
+
+	<div class="container">
+		<div class="row" style="margin-bottom: -100px;">
+			<div class="col-xs-12">
+				<h2 class="section-headline">
+					<h2 class="section-headline">
+						<span th:text="${#strings.toUpperCase(user.username)}"></span>
+					</h2>
+				</h2>
+				<div></div>
+
+				<hr
+					style="position: absolute; width: 20%; height: 3px; margin-top: -5px;" />
+
+				<div class="row" style="margin-top: 50px;">
+					<div class="col-xs-8">
+
+						<!-- Nawigacja -->
+						<ul class="nav nav-tabs">
+							<li th:classappend="${classActiveEdit}? 'active' "><a
+								href="#tab-1" data-toggle="tab"><span style="color: red">	Edytuj</span></a></li>
+							<li th:classappend="${classActiveOrder}? 'active' "><a
+								href="#tab-2" data-toggle="tab"><span style="color: red">	Zamówienia</span></a></li>
+							<li th:classappend="${classActiveBilling}? 'active' "><a
+								href="#tab-3" data-toggle="tab"><span style="color: red">Rachunek</span></a></li>
+							<li th:classappend="${classActiveShipping}? 'active' "><a
+								href="#tab-4" data-toggle="tab"><span style="color: red">Wysy³ka</span></a></li>
+						</ul>
+
+						<!-- Zawartoœc nawigacji -->
+						<div class="tab-content">
+
+							<!--edytuj urzytkowniaka -->
+							<div class="tab-pane fade" id="tab-1"
+								th:classappend="${classActiveEdit}? 'in active' ">
+								<div class="panel-group">
+									<div class="panel panel-default" style="border: none;">
+										<div class="panel-body"
+											style="background-color: #ededed; margin-top: 20px;">
+											<form th:action="@{/updateUserInfo}" method="post">
+												<input type="hidden" name="id" th:value="${user.id}" />
+
+												<div class="bg-info" th:if="${updateUserInfo}">Uaktualniono dane o urzytkowniku.</div>
+
+												<div class="form-group">
+													<div class="row">
+														<div class="col-xs-6">
+															<label for="firstName">Imiê</label> <input type="text"
+																class="form-control" id="firstName" name="firstName"
+																th:value="${user.firstName}" />
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<div class="row">
+														<div class="col-xs-6">
+															<label for="lastName">Nazwisko</label> <input type="text"
+																class="form-control" id="lastName" name="lastName"
+																th:value="${user.lastName}" />
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label for="userName">Nazwa u¿ytkownika</label> <input
+														type="text" class="form-control" id="userName"
+														name="username" th:value="${user.username}" />
+												</div>
+
+												<div class="form-group">
+													<label for="currentPassword">Stare has³o</label> <input
+														type="text" class="form-control" id="currentPassword"
+														name="currentPassword" th:value="${currentPassword}" />
+												</div>
+
+												<p style="color:#828282">Podaj obecne has³o aby
+													zmieniæ email lub has³o.</p>
+
+												<div class="form-group">
+													<label for="email">* Podaj email</label> <input type="text"
+														class="form-control" id="email" name="email"
+														th:value="${user.email}" />
+												</div>
+
+												<p style="color: #828282">Podaj adres email.</p>
+
+
+												<div class="form-group">
+													<label for="txtNewPassword">Has³o</label> <input
+														type="password" class="form-control" id="txtNewPassword"
+														name="newPassword" />
+												</div>
+
+												<div class="form-group">
+													<label for="txtConfirmPassword">Powtórz has³o</label> <input
+														type="password" class="form-control"
+														id="txtConfirmPassword" />
+
+												</div>
+												<p style="color: #828282">Aby zmieniæ has³o, wpisz nowe
+													has³o w poni¿szych polach..</p>
+
+												<button type="submit" class="btn btn-primary">Stwórz
+													nowe konto</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- koniec kontenera -->
+
+
+			<div th:replace="common/header :: body-bottom-scripts" ></div>
+</body>
+</html>

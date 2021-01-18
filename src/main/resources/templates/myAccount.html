@@ -1,0 +1,148 @@
+
+<!doctype html>
+<html lang="pl-PL" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="common/header :: common-header" />
+
+<body>
+
+	<div th:replace="common/header :: navbar">></div>
+
+
+
+	<!--kontenera -->
+
+	<div class="container"></div>
+	<div class="row" style="margin-bottom: -100px;"></div>
+	<div class="col-xs-12">
+		<h2 class="section-headline">
+			<span>Konto użytkownika</span>
+		</h2>
+		<div></div>
+
+		<hr
+			style="position: absolute; width: 20%; height: 3px; margin-top: -5px;" />
+
+		<div class="row" style="margin-top: 50px;">
+			<div class="col-xs-8">
+
+				<!-- Nawigacja -->
+				<ul class="nav nav-tabs">
+					<li th:classappend="${classActiveNewAccount}? 'active' "><a
+						href="#tab-1" data-toggle="tab"><span style="color: red">
+								Stwórz nowe konto</span></a></li>
+					<li th:classappend="${classActiveLogin}? 'active' "><a
+						href="#tab-2" data-toggle="tab"><span style="color: red">
+								Zaloguj</span></a></li>
+					<li th:classappend="${classActiveForgetPassword}? 'active' ">
+						<a href="#tab-3" data-toggle="tab"><span style="color: red">
+								Przypomnij hasło</span></a>
+					</li>
+				</ul>
+
+				<!-- Zawartośc nawigacji -->
+				<div class="tab-content">
+
+					<!--Tworzeie urzytkownika -->
+					<div class="tab-pane fade" id="tab-1"
+						th:classappend="${classActiveNewAccount}? 'in active' ">
+						<div class="panel-group">
+							<div class="panel panel-default" style="border: none;">
+								<div class="panel-body"
+									style="background-color: #ededed; margin-top: 20px;">
+									<div class="alert alert-info" th:if="${emailSent}">Email
+										has bean sent.</div>
+									<form th:action="@{/newUser}" method="post">
+										<div class="form-group">
+											<label for="newUsername">* Nazwa uzutkownika</label>&nbsp; <span
+												style="color: red;" th:if="${usernameExists}">Nazwa
+												użytkownika juz istnieje, podaj inną.</span> <input
+												required="required" type="text" class="form-control"
+												id="newUsername" name="username" />
+											<p style="color: #828282">Podaj nazwe uzytkownika</p>
+										</div>
+
+										<div class="form-group">
+											<label for="email">* Podaj email</label>&nbsp; <span
+												style="color: red;" th:if="${emailExists}">Email juz
+												istnieje, podaj inny.</span> <input required="required" type="text"
+												class="form-control" id="email" name="email" />
+											<p style="color: #828282">Podaj email</p>
+										</div>
+										<button type="submit" class="btn btn-primary">Stwórz
+											nowe konto</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--Logowanie  -->
+					<div class="tab-pane fade" id="tab-2"
+						th:classappend="${classActiveLogin}? 'in active'">
+						<div class="panel-group">
+							<div class="panel panel-default" style="border: none;">
+								<div class="panel-body"
+									style="background-color: #ededed; margin-top: 20px;">
+									<div th:if="${param.error != null}" style="color:red;">Niepoprawna nazwa u żytkownika lub hasło</div>
+									<form th:action="@{/login}" method="post">
+							<div class="form-group">
+											<label for="username">* Nazwa użytkownika</label> <input
+												required="required" type="text" class="form-control"
+												id="username" name="username" />
+											<p style="color: #828282">Podaj nazwe uzytkownika</p>
+										</div>
+
+										<div class="form-group">
+											<label for="password">* Hasło</label> <input required="required"
+												type="password" class="form-control" id="password"
+												name="password" />
+											<p style="color: #828282">Podaj hasło</p>
+										</div>
+										<button type="submit" class="btn btn-primary">Zaloguj</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--Przypomnienie hasla   -->
+					<div class="tab-pane fade" id="tab-3"
+						th:classappend="${classActiveForgetPassword}? 'in active' ">
+						<div class="panel-group">
+							<div class="panel panel-default" style="border: none;">
+								<div class="panel-body"
+									style="background-color: #ededed; margin-top: 20px;">
+									<div th:if="${emailNotExist}" class="alert alert-danger">Email nie istnieje.</div>
+									<div th:if="${forgetPasswordEmailSent}" class="alert alert-success">Email został wysłany.</div>
+									<form th:action="@{/forgetPassword}" method="post">
+										<div class="form-group">
+											<label for="recoverEmail">* Twój email</label> <input
+												required="required" type="text" class="form-control"
+												id="recoverEmail" name="email" />
+											<p style="color: #828282">Podaj adres swojego maila</p>
+										</div>
+
+										<button type="submit" class="btn btn-primary">Wyslij</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+
+	<!-- koniec kontenera -->
+
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+</body>
+</html>
