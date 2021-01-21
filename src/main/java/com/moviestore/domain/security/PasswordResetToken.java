@@ -16,7 +16,7 @@ import com.moviestore.domain.User;
 @Entity
 public class PasswordResetToken {
 
-	private static final int EXPIRRATON = 60 *24;
+	private static final int EXPIRRATON =  ;
 	
 
 	@Id
