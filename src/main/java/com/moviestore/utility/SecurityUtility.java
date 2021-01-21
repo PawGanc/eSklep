@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SecurityUtility {
-	private static final String SALT = "salt";   //ostrożnie 
+	private static final String SALT = "salt";  
 	
 	@Bean
 	public static BCryptPasswordEncoder passwordEncoder() {
